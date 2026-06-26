@@ -1,4 +1,24 @@
-Student ={}
+import json
+import os
+
+File = 'Student.json'
+
+#Load Save data when the program starts
+
+def load_data():
+    if os.path.exists(File):
+        with open(File, 'r') as f:
+            return json.load(f)
+    
+    return{}
+
+#Save data file
+
+def Save_data(data):
+    with open(File, "w") as f:
+        json.dump(data, f , indent=4)
+
+Student = load_data()
 
 while True:
     print("\n------STUDENT MANAGER APP------")
@@ -15,6 +35,7 @@ while True:
         name = input("Enter Studnet Name: ")
         marks = int(input("Enter Marks: "))
         Student[name] = marks
+        Save_data(Student)
         print(f"{name} Successfully Added!")
         #Rahul 50
 
