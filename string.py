@@ -1,30 +1,51 @@
-from collections import Counter
+# function
+
+def greet():
+    print("Hello")
+
+# greet()
+
+def greet_name(name):
+    print(f"Welcome {name}")
+
+# names = input("Enter your name: ")
+# greet_name(names)
+
+def add_print(a,b):
+    print(a+b)
+
+# add_print(2,3)
+
+def add_return(a,b):
+    return a + b
+
+result = add_return(2,5)
+print(result *2)
 
 
-text ='Hello'
-for ch in text:
-    print(ch, end='')
+# Input validation
+
+marks = input('Enter Marks: ')
+
+if marks.isdigit():
+    marks = int(marks)
+    print(f"Valid marks is {marks}")
+else:
+    print('Enter Valid Marks')
+
+while True:
+    try:
+        marks = int(input("Enter Marks"))
+        print(f"Valid {marks}")
+        break
+
+    except ValueError:
+        print("Not a legit Number")
 
 
-for index, ch in enumerate(text):
-    print(index , ch)
-
-for i in range(len(text)):
-    print(i,text[i])
-i=0
-while i < len(text):
-    print(text[i])
-    i+=1
-text = "h e l l o"
-for ch in text:
-    if ch == " ":
-        continue       # skip spaces
-    print(ch, end='')
-# h e l l o   (spaces skipped, not printed)
 
 
-while True:                      # runs forever...
-    choice = input("Enter choice (q to quit): ")
-    if choice == "q":
-        break                    # ...until break ends it
-    print("You entered:", choice)
+
+
+
+
