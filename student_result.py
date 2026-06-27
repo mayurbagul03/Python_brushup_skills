@@ -12,6 +12,24 @@ def load_data():
     
     return{}
 
+def read_file():
+    with open("Student.json", "r") as f:
+        content = f.read()
+        print(content)
+
+# read_file()
+
+def write_file():
+    with open("Student.json", "r") as f:
+        for line in f:
+            print(line.strip())
+# write_file()
+def add_content():
+    with open("file.txt", "a") as f:
+        f.write("Manasi:98\n")
+
+# add_content()
+
 #Save data file
 
 def Save_data(data):
