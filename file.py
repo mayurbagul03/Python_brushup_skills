@@ -1,3 +1,5 @@
+from collections import Counter
+
 name = 'rahul'
 subject ='Maths'
 print(name[2:])
@@ -43,3 +45,9 @@ for i in text:
     if i.isalnum():
         result+=i
 print(result)
+
+count = Counter("Learning")
+print(count.keys())
+print(count.values())
+print(count.items())
+
