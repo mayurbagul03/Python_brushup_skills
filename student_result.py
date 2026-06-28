@@ -3,89 +3,54 @@ import os
 
 File = 'Student.json'
 
-#Load Save data when the program starts
+class Student:
+    def __init__(self,name, marks,age):
+        self.name = name
+        self.marks = marks
+        self.age=age
 
-def load_data():
-    if os.path.exists(File):
-        with open(File, 'r') as f:
-            return json.load(f)
+    def to_dict(self):
+        return {"name": self.name, "marks": self.marks, "age": self.age}
     
-    return{}
+    
 
-def read_file():
-    with open("Student.json", "r") as f:
-        content = f.read()
-        print(content)
+class StudentManager:
+    def __init__(self,File):
+        self.File = File
 
-# read_file()
-
-def write_file():
-    with open("Student.json", "r") as f:
-        for line in f:
-            print(line.strip())
-# write_file()
-def add_content():
-    with open("file.txt", "a") as f:
-        f.write("Manasi:98\n")
-
-# add_content()
-
-#Save data file
-
-def Save_data(data):
-    with open(File, "w") as f:
-        json.dump(data, f , indent=4)
-
-Student = load_data()
-
-while True:
-    print("\n------STUDENT MANAGER APP------")
-    print("1. Add Student")
-    print("2. View Student")
-    print("3. Check Result")
-    print("4. Exit")
-
-    choice = input("Enter your Choice: ")
-
-    #Add Student
-
-    if choice == "1":
-        name = input("Enter Studnet Name: ")
-        marks = int(input("Enter Marks: "))
-        Student[name] = marks
-        Save_data(Student)
-        print(f"{name} Successfully Added!")
-        #Rahul 50
-
-    #View Student
-    elif choice =="2":
-        if not Student:
-            print("No student found!")
-        else:
-            for name,marks in Student.items():
-                print(name, ":", marks)
-
-    #check Result
-
-    elif choice =="3":
-        name = input("Enter Student Name: ")
-
-        if name in Student:
-            marks = Student[name]
-
-            if marks >= 40:
-                print("Pass")
-            else:
-                print("Fail")
-
-        else:
-            print("Student Not Found: ")
-
-    elif choice =="4":
-        print("Exiting....")
-        break
-    else:
-        print("In-valid Input")
+    def load_data(self):
+        if os.path.exists(self.File):
+            try:
+                with open(self.File, "r") as f:
+                    return json.load(f)
+            except json.JSONDecodeError:
+                return []
+        return[]
             
+    
+    def save_data(self, data):
+        with open(self.File,"w") as f:
+            json.dump(data, f, indent=4)
+
+    
+    def add_student(self, name, marks, age):
+        data = self.load_data()
+        student = Student(name, marks, age)
+        data.append(student.to_dict())
+        self.save_data(data)
+        print(f"{name} added!")
+
+    def view_student(self):
+        data = self.load_data()
+        for i in data:
+            print(i)
 
 
+manager = StudentManager(File)
+name = input("Enter Student Name: ")
+marks = int(input('Enter Marks: '))
+age = int(input('Enter Student Age: '))
+manager.add_student(name,marks,age)
+manager.view_student()
+
+        

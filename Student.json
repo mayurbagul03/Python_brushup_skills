@@ -1,8 +1,22 @@
-{
-  "Mayur": 95,
-  "Aniket ": 80,
-  "Manasi": 50,
-  "sham": 25,
-  "ajay": 60,
-  "ekta": 75
-}
+[
+    {
+        "name": "mayur",
+        "marks": 85,
+        "age": 26
+    },
+    {
+        "name": "Manasi",
+        "marks": 85,
+        "age": 28
+    },
+    {
+        "name": "Aniket ",
+        "marks": 75,
+        "age": 29
+    },
+    {
+        "name": "Ajay",
+        "marks": 75,
+        "age": 31
+    }
+]
