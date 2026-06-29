@@ -1,7 +1,13 @@
-import json
-import os
+import mysql.connector
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Root",
+    database="school"
+)
+cursor=conn.cursor()
 
-File = 'Student.json'
+# File = 'Student.json'
 
 class Student:
     def __init__(self,name, marks,age):
@@ -15,22 +21,22 @@ class Student:
     
 
 class StudentManager:
-    def __init__(self,File):
-        self.File = File
+    # def __init__(self,File):
+    #     self.File = File
 
-    def load_data(self):
-        if os.path.exists(self.File):
-            try:
-                with open(self.File, "r") as f:
-                    return json.load(f)
-            except json.JSONDecodeError:
-                return []
-        return[]
+    # def load_data(self):
+    #     if os.path.exists(self.File):
+    #         try:
+    #             with open(self.File, "r") as f:
+    #                 return json.load(f)
+    #         except json.JSONDecodeError:
+    #             return []   
+    #     return[]
             
     
-    def save_data(self, data):
-        with open(self.File,"w") as f:
-            json.dump(data, f, indent=4)
+    # def save_data(self, data):
+    #     with open(self.File,"w") as f:
+    #         json.dump(data, f, indent=4)
 
     
     def add_student(self, name, marks, age):
@@ -46,11 +52,32 @@ class StudentManager:
             print(i)
 
 
-manager = StudentManager(File)
-name = input("Enter Student Name: ")
-marks = int(input('Enter Marks: '))
-age = int(input('Enter Student Age: '))
-manager.add_student(name,marks,age)
-manager.view_student()
+# manager = StudentManager(File)
+# name = input("Enter Student Name: ")
+# marks = int(input('Enter Marks: '))
+# age = int(input('Enter Student Age: '))
+# manager.add_student(name,marks,age) 
+# manager.view_student()
+def database_creat():
+    name = input("Enter Student Name: ")
+    marks = int(input("Enter Students Marks: "))
+    age = int(input("Enter Age"))
 
+    sql = "INSERT INTO students (name,marks,age) VALUES (%s,%s,%s)"
+    Values = (name, marks,age)
+    cursor.execute(sql, Values)
+
+    conn.commit()
+
+    print(f"{name} added to database")
+
+    conn.close()
+
+def database_view():
+    cursor.execute("SELECT id, name FROM students")
+    Students =cursor.fetchall()
+
+    for student in Students:
+        print(student)
         
+database_view()
